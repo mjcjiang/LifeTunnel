@@ -1,45 +1,48 @@
 #include <iostream>
-#include "message_packing.h"
+#include <string>
+#include "message_structs.h"
 
 using namespace std;
 
-// various bits for floating point types--
-// varies for different architectures
-typedef float float32_t;
-typedef double float64_t;
-
-int main(int argc, char **argv) {
-    /*
-    float f = 3.1415926, f2;
-    double d = 3.14159265358979323, d2;
-    uint32_t fi;
-    uint64_t di;
-
-    fi = pack754_32(f);
-    f2 = unpack754_32(fi);
-
-    di = pack754_64(d);
-    d2 = unpack754_64(di);
-
-    printf("float before : %.7f\n", f);
-    printf("float encoded: 0x%08" PRIx32 "\n", fi);
-    printf("float after : %.7f\n\n", f2);
-
-    printf("double before : %.20lf\n", d);
-    printf("double encoded: 0x%016" PRIx64 "\n", di);
-    printf("double after : %.20lf\n", d2);
-    */
-    
+int main(int argc, char **argv) { 
     unsigned char buf[1024];
-    unsigned char *buf_index = buf;
-    int8_t magic;
-    int16_t monkeycount;
-    int16_t packetsize;
+    memset(buf, 0x00, 1024);
 
-    packetsize = pack(buf_index, "ch", (int8_t)'g', (int16_t)-12);
-    printf("packet is %" PRId32 " bytes\n", packetsize);
-    unpack(buf, "ch", &magic, &monkeycount);
-    printf("%d\n", magic);
-    printf("%d\n", monkeycount);
+    VastMessage msg;
+    memset(&msg, 0x00, sizeof(VastMessage));
+
+    msg.Field1 = 'c';
+    msg.Field2 = 12.22;
+    memcpy(msg.Field3, "yes, madam!", 11);
+
+    /*
+    unsigned int packsize = VastMessage_Packing(buf, &msg);
+    cout << "packsize: " << packsize << endl;
+    */
+    unsigned int packsize = pack(buf, "cgs", msg.Field1, msg.Field2, msg.Field3);
+    cout << packsize << endl;
+
+    /*
+    VastMessage unpacked_msg;
+    memset(&unpacked_msg, 0x00, sizeof(VastMessage));
+    VastMessage_Unpacking(buf, &unpacked_msg);
+    
+    cout << unpacked_msg.Field1 << endl;
+    cout << unpacked_msg.Field2 << endl;
+    cout << string(unpacked_msg.Field3) << endl;
+    */
+
+    /*
+    float64_t x = 12.22;
+    unsigned char buf[1024];
+
+    uint64_t coded = pack754_64(x);
+    cout << coded << endl;
+
+    float64_t y;
+    y = unpack754_64(coded);
+    cout << y << endl;
+    */
+
     return 0;
 }

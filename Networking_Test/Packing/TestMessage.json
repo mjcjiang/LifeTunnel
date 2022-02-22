@@ -1,0 +1,46 @@
+{
+    "Structs": [
+        {
+            "StructName": "TestMessage",
+            "Comment": "This is a message structure for testing",
+            "Fields": [
+                {
+                    "Name": "Field1",
+                    "Type": "uint8_t",
+                    "ByteLen": "1"
+                },
+                {
+                    "Name": "Field2",
+                    "Type": "float64_t",
+                    "ByteLen": "8"
+                },
+                {
+                    "Name": "Field3",
+                    "Type": "char",
+                    "ByteLen": "10"
+                }
+            ]
+        },
+        {
+            "StructName": "VastMessage",
+            "Comment": "This is a message structure for testing",
+            "Fields": [
+                {
+                    "Name": "Field1",
+                    "Type": "int8_t",
+                    "ByteLen": "1"
+                },
+                {
+                    "Name": "Field2",
+                    "Type": "float64_t",
+                    "ByteLen": "8"
+                },
+                {
+                    "Name": "Field3",
+                    "Type": "char",
+                    "ByteLen": "20"
+                }
+            ]
+        }
+    ]
+}

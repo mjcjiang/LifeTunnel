@@ -5,6 +5,11 @@
 #include <stdarg.h>
 #include <string.h>
 
+// various bits for floating point types--
+// varies for different architectures
+typedef float float32_t;
+typedef double float64_t;
+
 #define pack754_16(f) (pack754((f), 16, 5))
 #define pack754_32(f) (pack754((f), 32, 8))
 #define pack754_64(f) (pack754((f), 64, 11))
